@@ -19,7 +19,6 @@ public final class Pair<X, Y> {
         return this.second;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
 
@@ -32,7 +31,7 @@ public final class Pair<X, Y> {
         }
 
         if (this.getClass() == obj.getClass()) {
-            Pair<X, Y> otherPair = (Pair<X, Y>) obj;
+            Pair otherPair = (Pair) obj;
             boolean firstsMatch = this.first == otherPair.first;
             boolean secondsMatch = this.second == otherPair.second;
             return firstsMatch && secondsMatch;
