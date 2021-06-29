@@ -1,55 +1,15 @@
 package com.alvarezdqal;
 
-import com.alvarezdqal.fsm.helpers.Pair;
-import com.alvarezdqal.fsm.machines.FiniteStateAcceptor;
-
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Test {
     public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        map.put("david", 23);
+        map.put("kim", 23);
+        map.put("abbie", 22);
 
-        HashSet<String> inputAlphabet = new HashSet<String>();
-        inputAlphabet.add("hello");
-        inputAlphabet.add("there");
-        inputAlphabet.add("world");
-
-        HashSet<String> states = new HashSet<String>();
-        states.add("i");
-        states.add("a");
-        states.add("b");
-        states.add("t1");
-        states.add("t2");
-
-        String initialState = "i";
-
-        HashMap<Pair<String, String>, String> stateTransitionFunction =
-                new HashMap<Pair<String, String>, String>();
-        stateTransitionFunction.put(new Pair<String, String>("i", "hello"), "i");
-        stateTransitionFunction.put(new Pair<String, String>("i", "there"), "a");
-        stateTransitionFunction.put(new Pair<String, String>("i", "world"), "b");
-        stateTransitionFunction.put(new Pair<String, String>("a", "hello"), "t1");
-        stateTransitionFunction.put(new Pair<String, String>("a", "there"), "t2");
-        stateTransitionFunction.put(new Pair<String, String>("a", "world"), "a");
-        stateTransitionFunction.put(new Pair<String, String>("b", "hello"), "b");
-        stateTransitionFunction.put(new Pair<String, String>("b", "there"), "i");
-        stateTransitionFunction.put(new Pair<String, String>("b", "world"), "t2");
-
-        HashSet<String> finalStates = new HashSet<String>();
-        finalStates.add("t1");
-        finalStates.add("t2");
-
-        FiniteStateAcceptor fsa =
-                new FiniteStateAcceptor(
-                        inputAlphabet, states, initialState, stateTransitionFunction, finalStates);
-
-        String[] seq = {"hello", "hello", "world", "hello", "there", "world", "world"};
-        boolean accepts = fsa.accepts(seq);
-
-        if (accepts) {
-            System.out.println("The passed sequence is accepted");
-        } else {
-            System.out.println("The passed sequence is not accepted.");
-        }
+        System.out.println("abbie: " + map.get("abbie"));
+        System.out.println("bob: " + map.get("bob"));
     }
 }

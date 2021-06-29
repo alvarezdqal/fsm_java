@@ -27,7 +27,7 @@ public class FiniteStateAcceptor extends FiniteStateMachine {
             if (nextState == null) {
                 throw new Error(
                         "The following encountered (state, input) pair is undefined in the state"
-                            + " transition fuction: ("
+                                + " transition fuction: ("
                                 + currentState
                                 + ", "
                                 + elem
