@@ -43,6 +43,13 @@ public class Test {
                 new FiniteStateAcceptor(
                         inputAlphabet, states, initialState, stateTransitionFunction, finalStates);
 
-        System.out.println(fsa);
+        String[] seq = {"hello", "hello", "world", "hello", "there", "world", "world"};
+        boolean accepts = fsa.accepts(seq);
+
+        if (accepts) {
+            System.out.println("The passed sequence is accepted");
+        } else {
+            System.out.println("The passed sequence is not accepted.");
+        }
     }
 }
