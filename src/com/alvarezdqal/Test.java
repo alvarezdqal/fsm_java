@@ -1,15 +1,17 @@
 package com.alvarezdqal;
 
+import com.alvarezdqal.fsm.helpers.Pair;
+
 import java.util.HashMap;
 
 public class Test {
     public static void main(String[] args) {
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
-        map.put("david", 23);
-        map.put("kim", 23);
-        map.put("abbie", 22);
 
-        System.out.println("abbie: " + map.get("abbie"));
-        System.out.println("bob: " + map.get("bob"));
+        Pair<String, String> firstPair = new Pair<String, String>("hello", "world");
+        Pair<String, String> secondPair = new Pair<String, String>("hello", "world");
+
+        HashMap<Pair<String, String>, String> map = new HashMap<Pair<String, String>, String>();
+        map.put(firstPair, "FIRST");
+        System.out.println(map.get(secondPair));
     }
 }
