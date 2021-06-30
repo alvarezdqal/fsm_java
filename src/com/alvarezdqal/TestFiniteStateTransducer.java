@@ -48,8 +48,8 @@ public class TestFiniteStateTransducer {
         transductionFunction.put(new Pair<String, String>("1", "b"), "y");
         transductionFunction.put(new Pair<String, String>("1", "c"), "z");
 
-        FiniteStateTransducer fst =
-                new FiniteStateTransducer(
+        FiniteStateTransducer<String, String, String> fst =
+                new FiniteStateTransducer<String, String, String>(
                         inputAlphabet,
                         states,
                         initialState,

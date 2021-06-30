@@ -6,31 +6,31 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-public class FiniteStateTransducer extends FiniteStateMachine {
-    HashSet<String> outputAlphabet;
-    HashMap<Pair<String, String>, String> transductionFunction;
+public class FiniteStateTransducer<I, S, O> extends FiniteStateMachine<I, S> {
+    HashSet<O> outputAlphabet;
+    HashMap<Pair<S, I>, O> transductionFunction;
 
     public FiniteStateTransducer(
-            HashSet<String> inputAlphabet,
-            HashSet<String> states,
-            String initialState,
-            HashMap<Pair<String, String>, String> stateTransitionFunction,
-            HashSet<String> outputAlphabet,
-            HashMap<Pair<String, String>, String> transductionFunction) {
+            HashSet<I> inputAlphabet,
+            HashSet<S> states,
+            S initialState,
+            HashMap<Pair<S, I>, S> stateTransitionFunction,
+            HashSet<O> outputAlphabet,
+            HashMap<Pair<S, I>, O> transductionFunction) {
         super(inputAlphabet, states, initialState, stateTransitionFunction);
         this.outputAlphabet = outputAlphabet;
         this.transductionFunction = transductionFunction;
     }
 
-    public LinkedList<String> transduce(String[] seq) {
+    public LinkedList<O> transduce(I[] seq) {
 
-        LinkedList<String> transduction = new LinkedList<String>();
-        String currentState = this.initialState;
-        for (String elem : seq) {
+        LinkedList<O> transduction = new LinkedList<O>();
+        S currentState = this.initialState;
+        for (I elem : seq) {
 
-            Pair<String, String> stateElemPair = new Pair<String, String>(currentState, elem);
+            Pair<S, I> stateElemPair = new Pair<S, I>(currentState, elem);
 
-            String outputLetter = this.transductionFunction.get(stateElemPair);
+            O outputLetter = this.transductionFunction.get(stateElemPair);
             if (outputLetter == null) {
                 throw new Error(
                         "The following encountered (state, input) pair is undefined in the"
@@ -42,7 +42,7 @@ public class FiniteStateTransducer extends FiniteStateMachine {
             }
             transduction.add(outputLetter);
 
-            String nextState = this.stateTransitionFunction.get(stateElemPair);
+            S nextState = this.stateTransitionFunction.get(stateElemPair);
             if (nextState == null) {
                 throw new Error(
                         "The following encountered (state, input) pair is undefined in the state"

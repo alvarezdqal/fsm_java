@@ -39,8 +39,8 @@ public class TestFiniteStateAcceptor {
         finalStates.add("t1");
         finalStates.add("t2");
 
-        FiniteStateAcceptor fsa =
-                new FiniteStateAcceptor(
+        FiniteStateAcceptor<String, String> fsa =
+                new FiniteStateAcceptor<String, String>(
                         inputAlphabet, states, initialState, stateTransitionFunction, finalStates);
 
         String[] seq = {"hello", "hello", "world", "hello", "there", "world", "world"};

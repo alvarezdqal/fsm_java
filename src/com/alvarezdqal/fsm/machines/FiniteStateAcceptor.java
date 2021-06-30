@@ -5,25 +5,25 @@ import com.alvarezdqal.fsm.helpers.Pair;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class FiniteStateAcceptor extends FiniteStateMachine {
-    HashSet<String> finalStates;
+public class FiniteStateAcceptor<I, S> extends FiniteStateMachine<I, S> {
+    HashSet<S> finalStates;
 
     public FiniteStateAcceptor(
-            HashSet<String> inputAlphabet,
-            HashSet<String> states,
-            String initialState,
-            HashMap<Pair<String, String>, String> stateTransitionFunction,
-            HashSet<String> finalStates) {
+            HashSet<I> inputAlphabet,
+            HashSet<S> states,
+            S initialState,
+            HashMap<Pair<S, I>, S> stateTransitionFunction,
+            HashSet<S> finalStates) {
         super(inputAlphabet, states, initialState, stateTransitionFunction);
         this.finalStates = finalStates;
     }
 
-    public boolean accepts(String[] seq) {
+    public boolean accepts(I[] seq) {
 
-        String currentState = this.initialState;
-        for (String elem : seq) {
-            Pair<String, String> stateElemPair = new Pair<String, String>(currentState, elem);
-            String nextState = this.stateTransitionFunction.get(stateElemPair);
+        S currentState = this.initialState;
+        for (I elem : seq) {
+            Pair<S, I> stateElemPair = new Pair<S, I>(currentState, elem);
+            S nextState = this.stateTransitionFunction.get(stateElemPair);
             if (nextState == null) {
                 throw new Error(
                         "The following encountered (state, input) pair is undefined in the state"
