@@ -12,6 +12,9 @@ public class TestPair {
 
         System.out.println("FIRST equals SECOND: " + firstPair.equals(secondPair));
 
+        System.out.println("FIRST CLASS: " + firstPair.getClass());
+        System.out.println("SECOND CLASS: " + secondPair.getClass());
+
         System.out.println("FIRST HASH: " + firstPair.hashCode());
         System.out.println("SECOND HASH: " + secondPair.hashCode());
 
@@ -19,6 +22,5 @@ public class TestPair {
         map.put(firstPair, "FIRST");
         System.out.println("MAP[firstPair]: " + map.get(firstPair));
         System.out.println("MAP[secondPair]: " + map.get(secondPair));
-        System.out.println("MAP CONTENTS: " + map.toString());
     }
 }

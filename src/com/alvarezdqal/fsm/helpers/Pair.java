@@ -19,6 +19,7 @@ public final class Pair<X, Y> {
         return this.second;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public boolean equals(Object obj) {
 
