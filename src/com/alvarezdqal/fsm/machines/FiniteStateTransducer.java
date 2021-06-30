@@ -22,7 +22,7 @@ public class FiniteStateTransducer extends FiniteStateMachine {
         this.transductionFunction = transductionFunction;
     }
 
-    public String[] transduce(String[] seq) {
+    public LinkedList<String> transduce(String[] seq) {
 
         LinkedList<String> transduction = new LinkedList<String>();
         String currentState = this.initialState;
@@ -33,8 +33,8 @@ public class FiniteStateTransducer extends FiniteStateMachine {
             String outputLetter = this.transductionFunction.get(stateElemPair);
             if (outputLetter == null) {
                 throw new Error(
-                        "The following encountered (state, input) pair is undefined in the output"
-                                + " fuction: ("
+                        "The following encountered (state, input) pair is undefined in the"
+                                + " transduction fuction: ("
                                 + currentState
                                 + ", "
                                 + elem
@@ -55,6 +55,6 @@ public class FiniteStateTransducer extends FiniteStateMachine {
             currentState = nextState;
         }
 
-        return (String[]) transduction.toArray();
+        return transduction;
     }
 }
