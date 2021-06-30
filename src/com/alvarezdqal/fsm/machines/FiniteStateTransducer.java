@@ -4,10 +4,11 @@ import com.alvarezdqal.fsm.helpers.Pair;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class FiniteStateTransducer extends FiniteStateMachine {
     HashSet<String> outputAlphabet;
-    HashMap<Pair<String, String>, String> ouputFunction;
+    HashMap<Pair<String, String>, String> transductionFunction;
 
     public FiniteStateTransducer(
             HashSet<String> inputAlphabet,
@@ -15,9 +16,45 @@ public class FiniteStateTransducer extends FiniteStateMachine {
             String initialState,
             HashMap<Pair<String, String>, String> stateTransitionFunction,
             HashSet<String> outputAlphabet,
-            HashMap<Pair<String, String>, String> ouputFunction) {
+            HashMap<Pair<String, String>, String> transductionFunction) {
         super(inputAlphabet, states, initialState, stateTransitionFunction);
         this.outputAlphabet = outputAlphabet;
-        this.ouputFunction = ouputFunction;
+        this.transductionFunction = transductionFunction;
+    }
+
+    public String[] transduce(String[] seq) {
+
+        LinkedList<String> transduction = new LinkedList<String>();
+        String currentState = this.initialState;
+        for (String elem : seq) {
+
+            Pair<String, String> stateElemPair = new Pair<String, String>(currentState, elem);
+
+            String outputLetter = this.transductionFunction.get(stateElemPair);
+            if (outputLetter == null) {
+                throw new Error(
+                        "The following encountered (state, input) pair is undefined in the output"
+                                + " fuction: ("
+                                + currentState
+                                + ", "
+                                + elem
+                                + ")");
+            }
+            transduction.add(outputLetter);
+
+            String nextState = this.stateTransitionFunction.get(stateElemPair);
+            if (nextState == null) {
+                throw new Error(
+                        "The following encountered (state, input) pair is undefined in the state"
+                                + " transition fuction: ("
+                                + currentState
+                                + ", "
+                                + elem
+                                + ")");
+            }
+            currentState = nextState;
+        }
+
+        return (String[]) transduction.toArray();
     }
 }

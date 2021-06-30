@@ -47,7 +47,7 @@ public class TestFiniteStateAcceptor {
         boolean accepts = fsa.accepts(seq);
 
         if (accepts) {
-            System.out.println("The passed sequence is accepted");
+            System.out.println("The passed sequence is accepted.");
         } else {
             System.out.println("The passed sequence is not accepted.");
         }

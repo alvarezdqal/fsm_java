@@ -22,8 +22,8 @@ public class FiniteStateAcceptor extends FiniteStateMachine {
 
         String currentState = this.initialState;
         for (String elem : seq) {
-            Pair<String, String> arg = new Pair<String, String>(currentState, elem);
-            String nextState = this.stateTransitionFunction.get(arg);
+            Pair<String, String> stateElemPair = new Pair<String, String>(currentState, elem);
+            String nextState = this.stateTransitionFunction.get(stateElemPair);
             if (nextState == null) {
                 throw new Error(
                         "The following encountered (state, input) pair is undefined in the state"
